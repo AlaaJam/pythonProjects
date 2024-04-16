@@ -1,0 +1,26 @@
+import DataPrepKit
+
+#Read Data
+df = DataPrepKit.read_csv("path/to/your/file.csv")
+
+#Remove Missing Values
+df_clean = DataPrepKit.remove_missing_values(df)
+
+#Impute Missing Values
+df_imputed = DataPrepKit.impute_missing_values(df_clean, strategy='mean')
+
+#Perform One-Hot Encoding
+df_encoded = DataPrepKit.one_hot_encoding(df_imputed, columns=['column1', 'column2'])
+
+#Perform Label Encoding
+labels = DataPrepKit.label_encoding(df_encoded, column='category_column')
+
+#Generate Data Summary
+summary = DataPrepKit.generate_summary(df_encoded)
+
+#Get Most Frequent Values
+frequent_values = DataPrepKit.most_frequent_values(df_encoded)
+
+# Print
+print(summary)
+print(frequent_values)
