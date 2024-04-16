@@ -1,0 +1,9 @@
+MANIFEST.in
+README.md
+setup.py
+DataPrepKit.egg-info/PKG-INFO
+DataPrepKit.egg-info/SOURCES.txt
+DataPrepKit.egg-info/dependency_links.txt
+DataPrepKit.egg-info/entry_points.txt
+DataPrepKit.egg-info/requires.txt
+DataPrepKit.egg-info/top_level.txt
