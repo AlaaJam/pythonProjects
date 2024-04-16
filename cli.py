@@ -1,45 +1,37 @@
-# def main():
-#     print("This is the CLI")
 import pandas as pd
+from DataPrepKit import read_csv, read_excel, read_json, data_summary, most_frequent_values, remove_missing_values, impute_missing_values, one_hot_encoding, label_encoding
 
-def read_csv(file_path):
-    return pd.read_csv(file_path)
+data_path = input("Enter the path of the data file: ")
 
-def read_excel(file_path):
-    return pd.read_excel(file_path)
+if data_path.endswith('.csv'):
+    data = read_csv(data_path)
+elif data_path.endswith('.xlsx'):
+    data = read_excel(data_path)
+elif data_path.endswith('.json'):
+    data = read_json(data_path)
+else:
+    print("Unsupported file format")
 
-def read_json(file_path):
-    return pd.read_json(file_path)
-
-
-def data_summary(data):
-    return data.describe()
-
-def most_frequent_values(data):
-    return data.mode()
-
-
-def remove_missing_values(data):
-    return data.dropna()
-
-def impute_missing_values(data, strategy='mean'):
-    if strategy == 'mean':
-        return data.fillna(data.mean())
-    elif strategy == 'median':
-        return data.fillna(data.median())
-    elif strategy == 'mode':
-        return data.fillna(data.mode().iloc[0])
-
-def one_hot_encoding(data, columns):
-    return pd.get_dummies(data, columns=columns)
-
-def label_encoding(data, columns):
-    from sklearn.preprocessing import LabelEncoder
-    encoder = LabelEncoder()
-    for col in columns:
-        data[col] = encoder.fit_transform(data[col])
-    return data
+summary = data_summary(data)
+print("Summary Statistics:")
+print(summary)
 
 
+data_without_missing = remove_missing_values(data)
+print("Data without missing values:")
+print(data_without_missing.head())
 
 
+data_imputed_mean = impute_missing_values(data)
+print("Data with missing values imputed using mean:")
+print(data_imputed_mean.head())
+
+
+data_encoded = one_hot_encoding(data, columns=['categorical_column'])
+print("Data after one-hot encoding:")
+print(data_encoded.head())
+
+
+data_labeled = label_encoding(data, columns=['categorical_column'])
+print("Data after label encoding:")
+print(data_labeled.head())
